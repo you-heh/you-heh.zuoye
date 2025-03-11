@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>小米商城 - 手机列表</title>
+    <!--229990429 舒爽-->
+    <style>
+        body {
+            background: #f5f5f5;
+            margin: 0;
+            font-family: 'MiSans', 'Helvetica Neue', Arial, sans-serif;
+        }
+       .container {
+            display: grid;
+            grid-template-columns: 175px 1fr;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+       
+       .special-column {
+            background: #fff;
+            border-radius: 8px;
+            height: calc(2 * 330px + 20px);
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+       .special-column:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+       .goods-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 16px;
+            align-content: start;
+            padding: 0!important;
+        }
+
+       .goods-card {
+            background: #fff;
+            height: 330px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+       .goods-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+       
+       .product-image {
+            width: 100%;
+            height: 155px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        
+       .special-column.product-image {
+            height: 100%;
+            width: 100%;
+            padding: 0; 
+            object-fit: cover; 
+        }
+
+        
+       .new-badge {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            background: #ff6700;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 0 18px 18px 0;
+            font-size: 14px;
+        }
+
+        
+       .price::after {
+            font-size: 12px;
+            color: #999;
+            margin-left: 2px;
+            font-weight: normal;
+        }
+
+        
+       .product-info {
+            padding: 0 20px;
+            text-align: center; 
+        }
+
+       .title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            line-height: 1.2;
+            color: #000;
+            text-align: center;
+        }
+
+       .description {
+            font-size: 14px;
+            color: #747373;
+            margin-bottom: 10px;
+            text-align: center; 
+        }
+
+       .price-box {
+            font-size: 16px;
+            color: #ff6700;
+            text-align: center; 
+        }
+       .container a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+    <template id="root">
+        <div class="container">
+            <!-- 左侧 -->
+            <div class="special-column" v-for="phone in specialProduct" :key="phone.id">
+                <a :href="phone.url">
+                    <img :src="phone.img" class="product-image" style="object-fit: none; height: 100%;" />
+                </a>
+            </div>
+            <!-- 右侧 -->
+            <div class="goods-list">
+                <div class="goods-card" v-for="phone in regularProducts" :key="phone.id">
+                    <a :href="phone.url">
+                        <img :src="phone.img" class="product-image" />
+                        <div class="product-info">
+                            <h3 class="title">{{ phone.title }}</h3>
+                            <p class="description">{{ phone.des }}</p>
+                            <div class="price-box">
+                                <span class="price">{{ phone.price }}</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        const app = Vue.createApp({
+            template: '#root',
+            data() {
+                return {
+                    phoneList: [
+                        {
+                            id: 100080,
+                            img: './images/image_left.png',
+                            url: '#'
+                        },
+                        {
+                            id: 100081,
+                            img: './images/image01.png',
+                            title: 'Xiaomi 13',
+                            des: '超感光徕卡影像 | 新一代疾速芯',
+                            price: '4299元起',
+                            url: '#'
+                        },
+                        {
+                            id: 100082,
+                            img: './images/image02.png',
+                            title: 'Redmi K60',
+                            des: '旗舰骁龙芯 | 2K高光屏',
+                            price: '2499元起',
+                            url: '#'
+                        },
+                        {
+                            id: 100083,
+                            img: './images/image03.png',
+                            title: 'Xiaomi Mix Fold 2',
+                            des: '超薄折叠双屏 | 骁龙8+旗舰处理器',
+                            price: '8999元起',
+                            url: '#'
+                        },
+                        {
+                            id: 100083,
+                            img: './images/image04.png',
+                            title: 'Xiaomi Mix Fold 2',
+                            des: '超薄折叠双屏 | 骁龙8+旗舰处理器',
+                            price: '8999元起',
+                            url: '#'
+                        },
+                        {
+                            id: 100083,
+                            img: './images/image05.png',
+                            title: 'Xiaomi Mix Fold 2',
+                            des: '超薄折叠双屏 | 骁龙8+旗舰处理器',
+                            price: '8999元起',
+                            url: '#'
+                        },
+                        {
+                            id: 100083,
+                            img: './images/image06.png',
+                            title: 'Xiaomi Mix Fold 2',
+                            des: '超薄折叠双屏 | 骁龙8+旗舰处理器',
+                            price: '8999元起',
+                            url: '#'
+                        },
+                        {
+                            id: 100083,
+                            img: './images/image07.png',
+                            title: 'Xiaomi Mix Fold 2',
+                            des: '超薄折叠双屏 | 骁龙8+旗舰处理器',
+                            price: '8999元起',
+                            url: '#'
+                        },
+                        {
+                            id: 100083,
+                            img: './images/image08.png',
+                            title: 'Xiaomi Mix Fold 2',
+                            des: '超薄折叠双屏 | 骁龙8+旗舰处理器',
+                            price: '8999元起',
+                            url: '#'
+                        }
+                    ]
+                }
+            },
+            computed: {
+                specialProduct() {
+                    return this.phoneList.filter(phone => phone.id === 100080)
+                },
+                regularProducts() {
+                    return this.phoneList.filter(phone => phone.id!== 100080)
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>
