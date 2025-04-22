@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画登录窗口</title>
+    <!-- 引入 Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- 引入 Vue 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!---229990429 舒爽-->
+</head>
+
+<body>
+    <div id="app">
+        <div v-if="showLogin" class="animate__animated animate__fadeInDown login-container">
+            <h2>登录</h2>
+            <input type="text" placeholder="用户名" v-model="username">
+            <input type="password" placeholder="密码" v-model="password">
+            <button @click="login">登录</button>
+        </div>
+        <button v-if="!showLogin" @click="showLogin = true">显示登录窗口</button>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    showLogin: false,
+                    username: '',
+                    password: ''
+                };
+            },
+            methods: {
+                login() {
+                    console.log('用户名:', this.username, '密码:', this.password);
+                }
+            }
+        }).mount('#app');
+    </script>
+    <style>
+        .login-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 300px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</body>
+
+</html>
+    
